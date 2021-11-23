@@ -72,6 +72,3 @@ module.exports = {
     lightsOn,
     showTurns
 };
-
-
-/**player turn */
