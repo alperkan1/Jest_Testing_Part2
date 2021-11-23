@@ -39,7 +39,7 @@ function showScore() {
     document.getElementById("score").innerText = game.score;
 }
 
-module.exports = { game, newGame, showScore, addTurn };
+module.exports = { game, newGame, showScore, addTurn,lightsOn };
 
 /*add turn*/
 
