@@ -2,35 +2,42 @@
  * @jest-environment jsdom
  */
 
- const { game, newGame, showScore, addTurn, lightsOn, showTurns } = require("../game");
+const {
+    game,
+    newGame,
+    showScore,
+    addTurn,
+    lightsOn,
+    showTurns
+} = require("../game");
 
- beforeAll(() => {
-     let fs = require("fs");
-     let fileContents = fs.readFileSync("index.html", "utf-8");
-     document.open();
-     document.write(fileContents);
-     document.close();
- });
- 
- describe("game object contains correct keys", () => {
-     test("score key exists", () => {
-         expect("score" in game).toBe(true);
-     });
-     test("currentGame key exists", () => {
+beforeAll(() => {
+    let fs = require("fs");
+    let fileContents = fs.readFileSync("index.html", "utf-8");
+    document.open();
+    document.write(fileContents);
+    document.close();
+});
+
+describe("game object contains correct keys", () => {
+    test("score key exists", () => {
+        expect("score" in game).toBe(true);
+    });
+    test("currentGame key exists", () => {
         expect("currentGame" in game).toBe(true);
     });
     test("playerMoves key exists", () => {
         expect("playerMoves" in game).toBe(true);
     });
     test("choices contain correct ids", () => {
-        expect(game.choices).toEqual(["button1","button2","button3","button4"]);
+        expect(game.choices).toEqual(["button1", "button2", "button3", "button4"]);
     });
-      test("turnNumber key exists", () => {
+    test("turnNumber key exists", () => {
         expect("turnNumber" in game).toBe(true);
     });
- });
+});
 
- describe("newGame works correctly", () => {
+describe("newGame works correctly", () => {
     beforeAll(() => {
         game.score = 42;
         game.playerMoves = ["button1", "button2"];
@@ -47,19 +54,19 @@
     test("should clear the player moves array", () => {
         expect(game.playerMoves.length).toBe(0);
     });
-    test("should be one element in the computer array",() => {
+    test("should be one element in the computer array", () => {
         expect(game.currentGame.length).toBe(1);
     });
     test("expect data linsener to be true", () => {
         const elements = document.getElementsByClassName("circle");
-         for (let element of elements) {
+        for (let element of elements) {
             expect(element.getAttribute("data-listener")).toEqual("true");
         }
     });
 });
 
 describe("game play works correctly", () => {
-    beforeEach(() =>{
+    beforeEach(() => {
         game.score = 0;
         game.currentGame = [];
         game.playerMoves = [];
@@ -70,7 +77,7 @@ describe("game play works correctly", () => {
         game.currentGame = [];
         game.playerMoves = [];
     });
-    test("addTurn add a new turn to the game",() =>{
+    test("addTurn add a new turn to the game", () => {
         addTurn();
         expect(game.currentGame.length).toBe(2);
     });
@@ -85,5 +92,3 @@ describe("game play works correctly", () => {
         expect(game.turnNumber).toBe(0);
     });
 });
-
-
