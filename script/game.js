@@ -13,8 +13,18 @@ function newGame() {
     game.currentGame = [];
     game.playerMoves = [];
     game.score = 0;
+    for (let circle of document.getElementsByClassName("circle")){
+        if(circle.getAttribute("data-listener") !== "true") {
+            circle.addEventListener("click" , (e) => {
+            let move =e.target.getAttribute("id");
+            lightsOn(move);
+            game.playerMoves.push(move);
+            playerTurn();
+        });
+    }
+    }
     showScore();
-    addTurn()
+    addTurn();
 }
 /*add turn*/
 
@@ -54,12 +64,6 @@ function showScore() {
 }
 
 module.exports = { game, newGame, showScore, addTurn,lightsOn, showTurns };
-
-/*add turn*/
-
-
-/**show turn */
-
 
 
 /**player turn */
